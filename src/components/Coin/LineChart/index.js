@@ -25,9 +25,9 @@ function LineChart({ chartData, priceType, multiAxis }) {
           callback: function (value, index, ticks) {
             if (priceType == "prices") {
               return "$" + value.toLocaleString();
-            } else  {
+            } else {
               return "$" + convertNumber(value);
-            } 
+            }
           },
         },
       },
@@ -40,15 +40,15 @@ function LineChart({ chartData, priceType, multiAxis }) {
           callback: function (value, index, ticks) {
             if (priceType == "prices") {
               return "$" + value.toLocaleString();
-            } else  {
+            } else {
               return "$" + convertNumber(value);
-            } 
+            }
           },
         },
       },
     },
-};
-return <Line data={chartData} options={options} />;
+  };
+  return <Line data={chartData} options={options} />;
 }
 
 export default LineChart;

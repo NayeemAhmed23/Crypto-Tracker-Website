@@ -4,11 +4,11 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { Button, createTheme, ThemeProvider } from "@mui/material";
 import Grid from "../Grid";
 import List from "../List";
 
-export default function TabsComponent({ coins }) {
+export default function TabsComponent({ coins, setSearch }) {
   const [value, setValue] = useState("grid");
 
   const handleChange = (event, newValue) => {
@@ -42,23 +42,50 @@ export default function TabsComponent({ coins }) {
           </TabList>
           <TabPanel value="grid">
             <div className="grid-flex">
-                {
-                    coins.map((coin, i) => {
-                        return  <Grid coin={coin} key={i} />
-                        
-                    })
-                }
+              {coins.length > 0 ? (
+                coins.map((coin, i) => {
+                  return <Grid coin={coin} key={i} delay={(i % 4) * 0.2} />;
+                })
+              ) : (
+                <div>
+                  <h1 style={{ textAlign: "center" }}>
+                    Sorry, Couldn't find the coin you're looking for 😞
+                  </h1>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      margin: "2rem",
+                    }}
+                  >
+                    <Button text="Clear Search" onClick={() => setSearch("")} />
+                  </div>
+                </div>
+              )}
             </div>
           </TabPanel>
           <TabPanel value="list">
-          <table className="list-table">
-          {
-                    coins.map((item, i) => {
-                        return (
-                            <List coin={item} key={i} />
-                        );
-                    })
-                }
+            <table className="list-table">
+              {coins.length > 0 ? (
+                coins.map((item, i) => {
+                  return <List coin={item} key={i} delay={(i % 8) * 0.2} />;
+                })
+              ) : (
+                <div>
+                  <h1 style={{ textAlign: "center" }}>
+                    Sorry, Couldn't find the coin you're looking for 😞
+                  </h1>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      margin: "2rem",
+                    }}
+                  >
+                    <Button text="Clear Search" onClick={() => setSearch("")} />
+                  </div>
+                </div>
+              )}
             </table>
           </TabPanel>
         </TabContext>

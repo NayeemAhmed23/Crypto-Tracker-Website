@@ -1,10 +1,15 @@
-import React from 'react'
-import "./styles.css"
+import React from "react";
+import "./styles.css";
 
-function Button({text, onClick, outlined}) {
+function Button({ text, onClick, outlined }) {
   return (
-    <div className={outlined ? "outlined-btn" : "btn"} onClick={() => onClick()}>{text}</div>
-  )
+    <div
+      className={outlined ? "outlined-btn" : "btn"}
+      onClick={() => onClick()}
+    >
+      {text}
+    </div>
+  );
 }
 
-export default Button
+export default Button;

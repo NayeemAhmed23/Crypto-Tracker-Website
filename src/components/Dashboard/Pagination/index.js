@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import Pagination from "@mui/material/Pagination";
-import "./styles.css"
+import "./styles.css";
 
-export default function PaginationComponent({ page, handlePageChange}) {
-
-
+export default function PaginationComponent({ page, handlePageChange }) {
   return (
     <div className="pagination-component">
       <Pagination
         count={10}
         page={page}
-        onChange={ (event, value) => handlePageChange(event, value)}
+        onChange={(event, value) => handlePageChange(event, value)}
         sx={{
           color: "var(--white)",
           "& .Mui-selected ": {

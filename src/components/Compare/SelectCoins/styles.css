@@ -1,7 +1,17 @@
 .coins-flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0rem 1.5rem;
+}
+
+.select-coins-div {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 1.5rem;
-    margin: 0rem 1.5rem; 
-}
+    margin: 1.5rem 3rem;
+    flex-wrap: wrap;
+  }
+  

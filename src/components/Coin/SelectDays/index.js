@@ -5,9 +5,7 @@ import "./styles.css";
 export default function SelectDays({ days, handleDaysChange, noPTag }) {
   return (
     <div className="select-days">
-      {!noPTag &&
-      <p>Price Change In</p>
-       }
+      {!noPTag && <p>Price Change In</p>}
       <Select
         sx={{
           height: "2.5rem",

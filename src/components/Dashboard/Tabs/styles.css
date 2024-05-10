@@ -1,28 +1,27 @@
 .grid-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1.5rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 3rem;
 }
 
 .list-table {
-    width: 80%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-
 @media only screen and (max-width: 1200px) {
-    .list-table {
-        width: 95%;
-    }
+  .list-table {
+    width: 95%;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
-.td-total-volume {
+  .td-total-volume {
     display: none;
-}
+  }
 }

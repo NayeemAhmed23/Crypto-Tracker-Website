@@ -7,13 +7,29 @@ import PaginationComponent from "../components/Dashboard/Pagination";
 import Loader from "../components/Common/Loader";
 import BackToTop from "../components/Common/BackToTop";
 import { get100Coins } from "../functions/get100Coins";
+import Footer from "../components/Common/Footer";
 
 function DashboardPage() {
   const [coins, setCoins] = useState([]);
   const [paginatedCoins, setPaginatedCoins] = useState([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false
+    getData();
+  }, []);
+
+  const getData = async () => {
+    setIsLoading(true);
+    const myCoins = await get100Coins();
+    if (myCoins) {
+      setCoins(myCoins);
+      setPaginatedCoins(myCoins.slice(0, 10));
+      setIsLoading(false);
+    }
+  };
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -31,30 +47,17 @@ function DashboardPage() {
       item.symbol.toLowerCase().includes(search.toLowerCase())
   );
 
-  useEffect(() => {
-    // https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false
-    getData();
-  }, []);
-
-  const getData = async () => {
-    const myCoins = await get100Coins();
-    if (myCoins) {
-      setCoins(myCoins);
-      setPaginatedCoins(myCoins.slice(0, 10));
-      setIsLoading(false);
-    }
-  };
-
   return (
     <>
-      <Header />
-      <BackToTop />
       {isLoading ? (
         <Loader />
       ) : (
         <div>
           <Search search={search} onSearchChange={onSearchChange} />
-          <TabsComponent coins={search ? filteredCoins : paginatedCoins} />
+          <TabsComponent
+            coins={search ? filteredCoins : paginatedCoins}
+            setSearch={setSearch}
+          />
           {!search && (
             <PaginationComponent
               page={page}
@@ -63,8 +66,21 @@ function DashboardPage() {
           )}
         </div>
       )}
+      <BackToTop />
     </>
   );
 }
 
 export default DashboardPage;
+
+// coins == 100 coins
+
+// PaginatedCoins -> Page 1 - coins.slice(0,10)
+// PaginatedCoins -> Page 2 = coins.slice(10,20)
+// PaginatedCoins -> Page 3 = coins.slice(20,30)
+// .
+// .
+// PaginatedCoins -> Page 10 = coins.slice(90,100)
+
+// PaginatedCoins -> Page X , then initial Count = (X-1)*10
+// coins.slice(initialCount,initialCount+10)
