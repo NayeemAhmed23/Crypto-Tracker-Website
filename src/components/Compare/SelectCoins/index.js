@@ -16,7 +16,7 @@ function SelectCoins({ crypto1, crypto2, handleCoinChange }) {
     "& .MuiSvgIcon-root": {
       color: "var(--white)",
     },
-    "&:hover": {
+    "& :hover": {
       "&& fieldset": {
         borderColor: "#3a80e9",
       },
